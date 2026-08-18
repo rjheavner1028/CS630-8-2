@@ -5,12 +5,16 @@ pipeline {
         pollSCM('H/5 * * * *')
     }
 
+    environment {
+        PYTHON = 'C:\\Users\\rjhea\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
+    }
+
     stages {
         stage('Check Python Code') {
             steps {
                 bat '''
                     echo Checking Python source files...
-                    python -m compileall -q .
+                    "%PYTHON%" -m compileall -q .
                 '''
             }
         }
@@ -20,13 +24,13 @@ pipeline {
                 bat '''
                     echo Starting Triangle API...
 
-                    start /B python stand_up_triangle_api.py > triangle_api.log 2>&1
+                    start /B "" "%PYTHON%" stand_up_triangle_api.py > triangle_api.log 2>&1
 
                     echo Waiting for Triangle API to start...
                     timeout /t 3 /nobreak > nul
 
                     echo Running pytest...
-                    python -m pytest -v --junitxml=test-results.xml
+                    "%PYTHON%" -m pytest -v --junitxml=test-results.xml
                 '''
             }
 
