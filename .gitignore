@@ -1,0 +1,8 @@
+@"
+.idea/
+__pycache__/
+*.pyc
+CS630-8-2-Student-Guide.docx
+CS630-8-2-Student-Guide.rtf
+CS630-8-2-Student-Guide.txt
+"@ | Set-Content .gitignore
