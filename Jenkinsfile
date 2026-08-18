@@ -27,7 +27,7 @@ pipeline {
                     start /B "" "%PYTHON%" stand_up_triangle_api.py > triangle_api.log 2>&1
 
                     echo Waiting for Triangle API to start...
-                    timeout /t 3 /nobreak > nul
+                    powershell -NoProfile -Command "Start-Sleep -Seconds 3"
 
                     echo Running pytest...
                     "%PYTHON%" -m pytest -v --junitxml=test-results.xml
